@@ -9,8 +9,10 @@ refresh_rate=$(get_tmux_option "@tmux2k-refresh-rate" 5)
 show_powerline=$(get_tmux_option "@tmux2k-show-powerline" true)
 l_sep=$(get_tmux_option "@tmux2k-left-sep" )
 r_sep=$(get_tmux_option "@tmux2k-right-sep" )
-wl_sep=$(get_tmux_option "@tmux2k-window-list-left-sep" )
-wr_sep=$(get_tmux_option "@tmux2k-window-list-right-sep" )
+# wl_sep=$(get_tmux_option "@tmux2k-window-list-left-sep" )
+wl_sep=$(get_tmux_option "@tmux2k-window-list-left-sep" )
+# wr_sep=$(get_tmux_option "@tmux2k-window-list-right-sep" )
+wr_sep=$(get_tmux_option "@tmux2k-window-list-right-sep" )
 window_list_alignment=$(get_tmux_option "@tmux2k-window-list-alignment" 'absolute-centre')
 window_list_format=$(get_tmux_option "@tmux2k-window-list-format" '#I:#W')
 window_list_flags=$(get_tmux_option "@tmux2k-window-list-flags" true)
@@ -55,8 +57,8 @@ dark_yellow=$(get_tmux_option "@tmux2k-dark-yellow" '#b8860b')
 declare -A plugin_colors=(
     ["bandwidth"]="purple text"
     ["battery"]="pink text"
-    ["cpu"]="light_green text"
-    ["cpu-temp"]="light_purple text"
+    ["cpu"]="blue text"
+    ["cpu-temp"]="blue text"
     ["cwd"]="blue text"
     ["docker"]="light_blue text"
     ["git"]="green text"
@@ -65,12 +67,12 @@ declare -A plugin_colors=(
     ["network"]="purple text"
     ["ping"]="purple text"
     ["pomodoro"]="red text"
-    ["ram"]="yellow text"
-    ["session"]="green text"
-    ["time"]="light_blue text"
+    ["ram"]="green text"
+    ["session"]="pink text"
+    ["time"]="dark_purple text"
     ["uptime"]="light_pink text"
     ["weather"]="orange text"
-    ["window-list"]="black blue"
+    ["window-list"]="text yellow"
     ["tdo"]="green text"
     ["updates"]="light_red text"
     ["custom"]="red text"
@@ -94,6 +96,43 @@ get_plugin_bg() {
 
 set_theme() {
     case $theme in
+    "cyberpunk")
+        iblack=$(get_tmux_option "@tmux2k-black" '#06040B')
+        gray=$(get_tmux_option "@tmux2k-gray" '#26233A')
+        white=$(get_tmux_option "@tmux2k-white" '#FFFFFF')
+        light_blue=$(get_tmux_option "@tmux2k-light-blue" '#00E0FF')
+        blue=$(get_tmux_option "@tmux2k-blue" '#00E8FF')
+        dark_blue=$(get_tmux_option "@tmux2k-dark-blue" '#6D28D9')
+        light_green=$(get_tmux_option "@tmux2k-light-green" '#B1FF8A')
+        green=$(get_tmux_option "@tmux2k-green" '#40D432')
+        dark_green=$(get_tmux_option "@tmux2k-dark-green" '#40D432')
+        light_orange=$(get_tmux_option "@tmux2k-light-orange" '#D4FF00')
+        orange=$(get_tmux_option "@tmux2k-yellow" '#D4FF00')
+        dark_orange=$(get_tmux_option "@tmux2k-dark-orange" '#D4FF00')
+        light_pink=$(get_tmux_option "@tmux2k-light-pink" '#FF1493')
+        pink=$(get_tmux_option "@tmux2k-light-purple" '#FF1493')
+        dark_pink=$(get_tmux_option "@tmux2k-dark-pink" '#FF006E')
+        light_purple=$(get_tmux_option "@tmux2k-light-purple" '#A78BFA')
+        purple=$(get_tmux_option "@tmux2k-purple" '#A78BFA')
+        dark_purple=$(get_tmux_option "@tmux2k-dark-purple" '#6D28D9')
+        light_red=$(get_tmux_option "@tmux2k-light-red" '#FF006E')
+        red=$(get_tmux_option "@tmux2k-red" '#FF006E')
+        dark_red=$(get_tmux_option "@tmux2k-dark-red" '#FF006E')
+        light_yellow=$(get_tmux_option "@tmux2k-light-yellow" '#D4FF00')
+        yellow=$(get_tmux_option "@tmux2k-yellow" '#D4FF00')
+        dark_yellow=$(get_tmux_option "@tmux2k-dark-yellow" '#D4FF00')
+
+        text=$(get_tmux_option "@tmux2k-text" '#B1FF8A')
+        bg_main=$(get_tmux_option "@tmux2k-bg-main" '#000000')
+        bg_alt=$(get_tmux_option "@tmux2k-bg-alt" '#26233A')
+        
+        prefix_highlight=$(get_tmux_option "@tmux2k-prefix-highlight" '#A78BFA')
+        message_bg=$(get_tmux_option "@tmux2k-message-bg" '#A78BFA')
+        message_fg=$(get_tmux_option "@tmux2k-message-fg" '#08050E')
+        
+        pane_active_border=$(get_tmux_option "@tmux2k-pane-active-border" '#A78BFA')
+        pane_border=$(get_tmux_option "@tmux2k-pane-border" '#6D28D9')
+        ;;
     "catppuccin")
         black=$(get_tmux_option "@tmux2k-black" '#1e2030')
         gray=$(get_tmux_option "@tmux2k-gray" '#3f3f3f')
@@ -237,13 +276,12 @@ set_theme() {
 
     text=$(get_tmux_option "@tmux2k-text" "$black")
     bg_main=$(get_tmux_option "@tmux2k-bg-main" "$black")
-    bg_alt=$(get_tmux_option "@tmux2k-bg-alt" "$gray")
-    message_bg=$(get_tmux_option "@tmux2k-message-bg" "$blue")
+    bg_alt=$(get_tmux_option "@tmux2k-bg-alt" "$black")
+    message_bg=$(get_tmux_option "@tmux2k-message-bg" "$purple")
     message_fg=$(get_tmux_option "@tmux2k-message-fg" "$black")
     pane_active_border=$(get_tmux_option "@tmux2k-pane-active-border" "$blue")
     pane_border=$(get_tmux_option "@tmux2k-pane-border" "$gray")
-    prefix_highlight=$(get_tmux_option "@tmux2k-prefix-highlight" "$blue")
-}
+    prefix_highlight=$(get_tmux_option "@tmux2k-prefix-highlight" "$blue") }
 
 set_options() {
     tmux set-option -g status-interval "$refresh_rate"
@@ -329,14 +367,14 @@ window_list() {
 
     if $window_list_flags; then
         flags="#{?window_flags,#[fg=${red}]#{window_flags},}"
-        current_flags="#{?window_flags,#[fg=${light_green}]#{window_flags},}"
+        current_flags="#{?window_flags,#[fg=${black}]#{window_flags},}"
     fi
 
     if $show_powerline; then
         tmux set-window-option -g window-status-current-format \
-            "#[fg=${wfg},bg=${wbg}]${wl_sep}#[bg=${wfg}]${current_flags}#[fg=${wbg}]${spacer}${window_list_format}${spacer}#[fg=${wfg},bg=${wbg}]${wr_sep}"
+            "#[fg=${wfg},bg=${bg_main}]${wl_sep}#[bg=${wfg}]${current_flags}#[fg=${wbg}]${spacer}${window_list_format}${spacer}#[fg=${wfg},bg=${bg_main}]${wr_sep}"
         tmux set-window-option -g window-status-format \
-            "#[fg=${bg_alt},bg=${wbg}]${wl_sep}#[bg=${bg_alt}]${flags}#[fg=${white}]${spacer}${window_list_format}${spacer}#[fg=${bg_alt},bg=${wbg}]${wr_sep}"
+            "#[fg=${bg_alt},bg=${bg_main}]${wl_sep}#[bg=${bg_alt}]${flags}#[fg=${yellow}]${spacer}${window_list_format}${spacer}#[fg=${bg_alt},bg=${bg_main}]${wr_sep}"
     else
         tmux set-window-option -g window-status-current-format "#[fg=${wbg},bg=${wfg}] ${window_list_format}${spacer}${current_flags} "
         tmux set-window-option -g window-status-format "#[fg=${white},bg=${bg_alt}] ${window_list_format}${spacer}${flags} "
