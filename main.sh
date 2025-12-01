@@ -281,7 +281,8 @@ set_theme() {
     message_fg=$(get_tmux_option "@tmux2k-message-fg" "$black")
     pane_active_border=$(get_tmux_option "@tmux2k-pane-active-border" "$blue")
     pane_border=$(get_tmux_option "@tmux2k-pane-border" "$gray")
-    prefix_highlight=$(get_tmux_option "@tmux2k-prefix-highlight" "$blue") }
+    prefix_highlight=$(get_tmux_option "@tmux2k-prefix-highlight" "$blue")
+}
 
 set_options() {
     tmux set-option -g status-interval "$refresh_rate"
